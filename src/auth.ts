@@ -3,7 +3,6 @@ import authConfig from "@/auth.config";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/lib/db";
 import { getUserById } from "@/database/user";
-import { UserRole } from "@prisma/client";
 import { getAccountByUserId } from "./database/account";
 
 export const {
@@ -39,9 +38,6 @@ export const {
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
-      if (token.role && session.user) {
-        session.user.role = token.role as UserRole;
-      }
       if (session.user) {
         session.user.name = token.name;
         session.user.email = token.email as string;
@@ -61,7 +57,6 @@ export const {
       token.OAuth = !!account;
       token.name = existingUser.name;
       token.email = existingUser.email;
-      token.role = existingUser.role;
 
       return token;
     },
