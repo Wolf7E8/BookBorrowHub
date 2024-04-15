@@ -1,46 +1,21 @@
-"use client";
-
 import { UserButton } from "@/components/auth/user-button";
-import { Button } from "@/components/ui/button";
+import { Notifications } from "@/components/notifications";
+import { Book } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export function Navbar() {
-  const pathName = usePathname();
-
   return (
-    <nav className="bg-secondary flex justify-between items-center p-4 rounded-xl w-2/3 shadow-md">
-      <div className="flex gap-x-2">
-        <Button
-          asChild
-          variant={pathName === "/settings" ? "default" : "outline"}
-          className="rounded py-1"
-        >
-          <Link href="/settings">Settings</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathName === "/server" ? "default" : "outline"}
-          className="rounded py-3"
-        >
-          <Link href="/server">Server</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathName === "/client" ? "default" : "outline"}
-          className="rounded py-3"
-        >
-          <Link href="/client">Client</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathName === "/admin" ? "default" : "outline"}
-          className="rounded py-3"
-        >
-          <Link href="/admin">Admin</Link>
-        </Button>
+    <nav className="bg-background brightness-125 flex justify-between items-center p-3 rounded-xl w-3/4  border border-purple-500/50 transition-all hover:border-purple-500/90 mb-8">
+      <Link href="/" className="flex items-center gap-x-2 font-bold">
+        <Book className="w-10 h-10  text-indigo-500 " />
+        <h1 className="font-bold text-2xl text-gradient bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:underline hover:underline-offset-3 decoration-indigo-500">
+          BookBorrowHub
+        </h1>
+      </Link>
+      <div className="flex gap-x-4">
+        <Notifications />
+        <UserButton />
       </div>
-      <UserButton />
     </nav>
   );
 }

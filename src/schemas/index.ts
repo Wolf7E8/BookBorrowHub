@@ -82,3 +82,11 @@ export const SettingsSchema = z
       path: ["password"],
     },
   );
+
+export const BookSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  author: z.string().min(1, "Author is required"),
+  publication_year: z.optional(z.number()),
+  publisher: z.optional(z.string()),
+  coverImage: z.optional(z.any()),
+});

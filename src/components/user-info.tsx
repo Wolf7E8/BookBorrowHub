@@ -29,10 +29,6 @@ export function UserInfo({ user, label }: UserInfoProps) {
           <p className="text-sm font-medium">Email</p>
           <p className="truncate text-xs font-mono rounded-md">{user?.email}</p>
         </div>
-        <div className="flex flex-row items-center  justify-between  rounded-xl border p-3 shadow-md">
-          <p className="text-sm font-medium">Role</p>
-          <p className="truncate text-xs font-mono rounded-md">{user?.role}</p>
-        </div>
       </CardContent>
     </Card>
   );

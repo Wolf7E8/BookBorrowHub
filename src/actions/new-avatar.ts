@@ -49,14 +49,18 @@ export async function newAvatarAction(
   }
 
   const oldImage = existingUser.image;
-
   if (oldImage) {
     const imagePath = oldImage.split("/");
     if (imagePath[imagePath.length - 2] === "avatars") {
-      const imageSrc = imagePath[imagePath.length - 1];
-      const filePath = path.join(PROJECT_DIR, "public", "avatars", imageSrc);
+      const imageSrcOld = imagePath[imagePath.length - 1];
+      const filePathOld = path.join(
+        PROJECT_DIR,
+        "public",
+        "avatars",
+        imageSrcOld,
+      );
       try {
-        await fs.unlink(filePath);
+        await fs.unlink(filePathOld);
       } catch (error) {
         console.log(error);
       }

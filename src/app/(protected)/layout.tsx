@@ -6,9 +6,9 @@ type ProtectedLayoutProps = {
 
 export default function ProtectedLayout({ children }: ProtectedLayoutProps) {
   return (
-    <div className="h-full w-full flex flex-col gap-y-10 items-center justify-center">
+    <section className="h-screen w-full  flex flex-col gap-y-5 items-center py-10 ">
       <Navbar />
       {children}
-    </div>
+    </section>
   );
 }

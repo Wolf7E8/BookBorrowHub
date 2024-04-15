@@ -28,8 +28,11 @@ export async function loginAction(
       verificationToken.email,
       verificationToken.token,
     );
-
     return { sucess: "Confirmation email sent!" };
+  }
+
+  if (existingUser && !existingUser.password) {
+    return { error: "Email already in use!" };
   }
 
   try {
