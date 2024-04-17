@@ -49,6 +49,8 @@ export const SettingsSchema = z
   .object({
     name: z.optional(z.string()),
     email: z.optional(z.string().email()),
+    description: z.optional(z.string()),
+    enabledNotifications: z.optional(z.boolean()),
     password: z.optional(
       z.string().min(8, { message: "Passowrd require minimum 8 characters" }),
     ),
@@ -86,7 +88,6 @@ export const SettingsSchema = z
 export const BookSchema = z.object({
   title: z.string().min(1, "Title is required"),
   author: z.string().min(1, "Author is required"),
-  publication_year: z.optional(z.number()),
+  publicationYear: z.optional(z.coerce.number()),
   publisher: z.optional(z.string()),
-  coverImage: z.optional(z.any()),
 });

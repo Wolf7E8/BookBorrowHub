@@ -18,10 +18,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormSucess } from "@/components/form-sucess";
 import { FormError } from "@/components/form-error";
-import { Contact, Lock, Mail } from "lucide-react";
+import { Bell, Contact, Lock, Mail, NotepadText } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function SettingsPage() {
   const user = useCurrentUser();
@@ -36,6 +38,8 @@ export default function SettingsPage() {
     defaultValues: {
       name: user?.name || undefined,
       email: user?.email || undefined,
+      description: user?.description || undefined,
+      enabledNotifications: user?.enabledNotifications || undefined,
       password: undefined,
       newPassword: undefined,
     },
@@ -80,13 +84,47 @@ export default function SettingsPage() {
                       <span className="text-lg">Name</span>
                     </FormLabel>
                     <FormControl>
-                      <Input
+                      <Input {...field} type="text" disabled={isPending} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="flex items-center gap-x-2 pb-1">
+                      <NotepadText className="w-5 h-5" />
+                      <span className="text-lg">Bio</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Tell us a little bit about yourself"
+                        className="resize-none"
                         {...field}
-                        type="text"
-                        placeholder="Bartek"
-                        disabled={isPending}
                       />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="enabledNotifications"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="flex items-center gap-x-2 pb-1">
+                      <Bell className="w-5 h-5" />
+                      <span className="text-lg">Notifications</span>
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormLabel>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -103,12 +141,7 @@ export default function SettingsPage() {
                           <span className="text-lg">Email</span>
                         </FormLabel>
                         <FormControl>
-                          <Input
-                            {...field}
-                            type="email"
-                            placeholder="email@gmail.com"
-                            disabled={isPending}
-                          />
+                          <Input {...field} type="email" disabled={isPending} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
